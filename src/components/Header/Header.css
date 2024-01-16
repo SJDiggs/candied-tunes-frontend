@@ -1,0 +1,13 @@
+@keyframes zoomInOnce {
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1);
+    }
+
+  }
+  .animate-zoom-in-once {
+    animation: zoomInOnce 1s ease-out;
+  }
+
