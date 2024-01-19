@@ -1,74 +1,48 @@
 import { useState, useEffect } from "react"
-
+import config from "./../config"
+import { getSongs } from "../utilities/songs-service";
+import Requests from "./Requests";
 
 const Landing = (props) => {
+
+    const [requestedSongs, setRequestedSongs] = useState([]);
+    
+    const [selectedSong, setSelectedSong] = useState({
+        songName: "",
+        songArtist: "",
+        songInstrument: ""
+      });
 
     const [isLoading, setIsLoading] = useState(true) //when page loads true, when loaded change to false
     const [songs, setSongs] = useState([])
 
-    const BASE_URL = "http://localhost:4000/songs" //Dev environment
+    // const BASE_URL = "http://localhost:4000/songs" //Dev environment
     // const BASE_URL = "<heroku link>" //Prod once Heroku is deployed
 
     const handleRequest = async () => {
         try {
-            const resp = await fetch(BASE_URL)
-            console.log(resp)
-           
-            if(resp.ok){
-                //access data
-                const respData = await resp.json()
-                console.log(respData)
-                setSongs(respData)
-            } else {
-                console.log('Fetch Error:')
-                // error handling
-                // pass data from response to error context
-                // trigger a redirect using RR hooks
-
+            const songsData = await getSongs()
+            console.log("Songs fetch: ",songsData)
+            if(songsData) {
+                setSongs(songsData)
             }
             setIsLoading(false)
         }catch(err){
             console.log(err)
         }
     }
-    // const renderSongs = () => (
-    //     <section className="song-list">
-    //       <h2>Loaded</h2>
-    //       <table className="border-collapse border border-stone-600">
-    //         <thead className="border border-stone-600">
-    //           <tr >
-    //             <th className="border border-stone-600">Song Name</th>
-    //             <th className="border border-stone-600">Artist</th>
-    //             <th className="border border-stone-600">Instrument</th>
-    //             <th className="border border-stone-600">Request</th>
-    //             <th className="border border-stone-600">Tip to the Top</th>
-    //           </tr>
-    //         </thead>
-    //         <tbody>
-    //           {songs?.map((s) => (
-    //             <tr key={s._id}>
-    //               <td className={`border border-stone-600
-    //                 ${s.songIsOriginal ? "text-purple-600 font-bold" : ""} 
-    //                 ${s.songPlayed ? "text-stone-700" : ""}`}>{s.songName}
-    //               </td> 
-    //               <td className={`border border-stone-600
-    //                 ${s.songIsOriginal ? "text-purple-600 font-bold" : ""} 
-    //                 ${s.songPlayed ? "text-stone-700" : ""}`}>{s.songArtist}
-    //               </td> 
-    //               <td className={`border border-stone-600
-    //                 ${s.songIsOriginal ? "text-purple-600 font-bold" : ""} 
-    //                 ${s.songPlayed ? "text-stone-700" : ""}`}>{s.songInstrument}
-    //               </td> 
-    //               <td className="border border-stone-600">
-    //                 <button className="bg-purple-900 text-white px-1 py-0 rounded-full ">Request</button>
-    //                 {/* when button is clicked the song information needs to be sent to the musician portal (/tools/requests) */}
-    //               </td>
-    //             </tr>
-    //           ))}
-    //         </tbody>
-    //       </table>
-    //     </section>
-    //   );
+
+
+    const handleRequestClick = (songId, songName, songArtist, songInstrument) => {
+        // Update the state to reflect that the song has been requested
+        setRequestedSongs((previousState) => [...previousState, songId]);
+
+        setSelectedSong({
+            songName: songName,
+            songArtist: songArtist,
+            songInstrument: songInstrument
+          });
+    }
 
     const renderSongs = () => (
         <section className="song-list flex justify-center items-center h-screen">
@@ -79,7 +53,7 @@ const Landing = (props) => {
                   <th className="py-3 px-6 border-b border-stone-600">Song Name</th>
                   <th className="py-3 px-6 border-b border-stone-600">Artist</th>
                   <th className="py-3 px-6 border-b border-stone-600">Instrument</th>
-                  <th className="py-3 px-6 border-b border-stone-600">Request</th>
+                  <th className="py-3 px-6 border-b border-stone-600" style={{ width: 'calc(10em + 3px)' }}>Request</th>
                   <th className="py-3 px-6 border-b border-stone-600">Tip to the Top</th>
                 </tr>
               </thead>
@@ -89,10 +63,22 @@ const Landing = (props) => {
                     <td className={`py-4 px-6 ${s.songIsOriginal ? "text-purple-600 font-bold" : ""} ${s.songPlayed ? "text-stone-700" : ""}`}>{s.songName}</td>
                     <td className={`py-4 px-6 ${s.songIsOriginal ? "text-purple-600 font-bold" : ""} ${s.songPlayed ? "text-stone-700" : ""}`}>{s.songArtist}</td>
                     <td className={`py-4 px-6 ${s.songIsOriginal ? "text-purple-600 font-bold" : ""} ${s.songPlayed ? "text-stone-700" : ""}`}>{s.songInstrument}</td>
-                    <td className="py-4 px-6">
-                      <button className="bg-purple-900 text-white px-3 py-1 rounded-full">Request</button>
-                      {/* when the button is clicked, the song information needs to be sent to the musician portal (/tools/requests) */}
-                    </td>
+                    <td className="py-4 px-6 text-center">
+                  <button
+                    id={s._id}
+                    className={`px-3 py-1 rounded-full ${
+                      s.songPlayed
+                        ? "bg-stone-900 text-stone-700"
+                        : requestedSongs.includes(s._id)
+                        ? "bg-pink-800 text-white"
+                        : "bg-purple-900 text-white"
+                    }`}
+                    onClick={() => handleRequestClick(s._id, s.songName, s.songArtist, s.songInstrument)}
+                    disabled={s.songPlayed}
+                  >
+                    {s.songPlayed ? "Played" : requestedSongs.includes(s._id) ? "Requested" : "Request"}
+                  </button>
+                </td>
                   </tr>
                 ))}
               </tbody>
@@ -101,6 +87,7 @@ const Landing = (props) => {
         </section>
       );
     const renderLoading = () => <h2>Loading Songs...</h2>
+
     useEffect( ()=> {
         handleRequest()
     }, [])

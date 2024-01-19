@@ -7,13 +7,15 @@ import Merch from '../../pages/Merch'
 import Shows from '../../pages/Shows'
 import Tip from '../../pages/Tip'
 import Error from '../../pages/Error'
+import config from "../../config";
+import Requests from "../../pages/Requests.jsx"
+console.log(config);
 
 
 const Main = (props) => {
 
     return (
        <main className = 'container'>
-         <h1 className="text-4xl font-bold mt-20 text-zinc-400">Main</h1>
          <Routes>
             <Route path="/" element = {<Landing />}/>
             <Route path="/tools" element = {<Tools />}/>
@@ -21,6 +23,7 @@ const Main = (props) => {
             <Route path="/merch" element = {<Merch />}/>
             <Route path="/shows" element = {<Shows />}/>
             <Route path="/tip" element = {<Tip />}/>
+            <Route path="/requests" element = {<Requests />}/>
             <Route path="/*" element = {<Error />}/>
          </Routes>
         </main>

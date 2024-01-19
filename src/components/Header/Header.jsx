@@ -5,7 +5,9 @@ import './Header.css'
 function Header() {
     // for testing set the isAdmin to true so we can see the tools nav link
     const [isAdmin] = useState(true) 
+
     const location = useLocation()
+    console.log('Location ', location)
 
 return (
     
@@ -20,7 +22,8 @@ return (
         <button className="bg-white text-xs px-1 py-1 text-purple-600 rounded-full hover:bg-pink-600 hover:text-white">Musician Login</button>
       </div>
       <nav className="flex items-center mt-7">
-        {isAdmin && <Link to="/tools"  className={`text-purple-600 ml-4 hover:text-pink-600 hover:underline ${
+        {isAdmin && <Link to="/tools" 
+            className={`text-purple-600 ml-4 hover:text-pink-600 hover:underline ${
             location.pathname === '/tools' ? 'text-pink-600' : ''
           }`}>Tools</Link>}
         <Link to="/" className={`text-purple-600 ml-4 hover:text-pink-600 hover:underline ${
