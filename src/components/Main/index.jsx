@@ -9,6 +9,7 @@ import Tip from '../../pages/Tip'
 import Error from '../../pages/Error'
 import config from "../../config";
 import Requests from "../../pages/Requests.jsx"
+import Profile from '../../pages/Profile.jsx'
 console.log(config);
 
 
@@ -24,6 +25,7 @@ const Main = (props) => {
             <Route path="/shows" element = {<Shows />}/>
             <Route path="/tip" element = {<Tip />}/>
             <Route path="/requests" element = {<Requests />}/>
+            <Route path="/profile" element = {<Profile />}/>
             <Route path="/*" element = {<Error />}/>
          </Routes>
         </main>
