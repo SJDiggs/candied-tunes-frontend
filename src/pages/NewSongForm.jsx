@@ -47,7 +47,9 @@ export default function NewSongForm(props) {
   return (
   
     <section>
-        <form onSubmit={handleSubmit} className="flex items-center space-x-4">
+      <div className="form-container">
+        <form onSubmit={handleSubmit} 
+            className="flex items-center space-x-4">
         <input className = "border h-full w-1/4 px-2 py-1"
             type="text"
             value={newForm.songName}
@@ -63,34 +65,42 @@ export default function NewSongForm(props) {
             onChange={handleChange}
         />
         <select
-          className="border px-2 py-1"
-          value={newForm.songInstrument}
-          name="songInstrument"
-         
-          onChange={handleChange}
+            className="border px-2 py-1"
+            value={newForm.songInstrument}
+            name="songInstrument"
+            onChange={handleChange}
         >
-          <option value="">Select Instrument</option>
-          <option value="Guitar">Guitar</option>
-          <option value="Ukulele">Ukulele</option>
+            <option value="">Select Instrument</option>
+            <option value="Guitar">Guitar</option>
+            <option value="Ukulele">Ukulele</option>
         </select>
         <select
-          className="border px-2 py-1"
-          value={newForm.songIsOriginal}
-          name="songIsOriginal"
-          onChange={handleChange}
+            className="border px-2 py-1"
+            value={newForm.songIsOriginal}
+            name="songIsOriginal"
+            onChange={handleChange}
         >
-          <option value="false">Original Song</option>
-          <option value="false">No</option>
-          <option value="true">Yes</option>
+            <option value="false">Original Song</option>
+            <option value="false">No</option>
+          < option value="true">Yes</option>
         </select>
         <input 
-          className = "bg-indigo-600 rounded-full py-0 px-2 mt-2 ml-10" 
-          type="submit" 
-          value="Add Song" 
+            className = "bg-indigo-600 rounded-full py-0 px-2 mt-2 ml-10" 
+            type="submit" 
+            value="Add Song" 
           />
-          {/* Display status message */}
-        {statusMessage && <p className="text-green-500 text-center mt-2 italic">{statusMessage}</p>}
-    </form>
+        </form>
+      </div>
+      
+      <div className="status-message-container">
+        {/* Display status message */}
+        {statusMessage && (
+          <p className="text-green-500 text-center mt-2 italic">
+            {statusMessage}
+          </p>
+        )}
+      </div>
+    
   </section>
   )
 }

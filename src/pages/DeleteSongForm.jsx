@@ -41,7 +41,9 @@ export default function DeleteSongForm(props) {
   return (
   
     <section>
-        <form onSubmit={handleSubmit} className="flex items-center space-x-4">
+      <div className="form-container">
+        <form onSubmit={handleSubmit} 
+            className="flex items-center space-x-4">
         <input className = "border h-full w-1/4 px-2 py-1"
             type="text"
             value={deleteForm.songName}
@@ -56,15 +58,18 @@ export default function DeleteSongForm(props) {
             placeholder="Artist"
             onChange={handleChange}
         />
-        
         <input 
             className = "bg-indigo-600 rounded-full py-0 px-2 mt-2 ml-auto" 
             type="submit" 
             value="Delete Song" 
         />
-    </form>
-    {/* Display status message */}
-        {statusMessage && <p className="text-green-500 text-center mt-2 italic">{statusMessage}</p>}
+        </form>
+      </div>
+
+      <div>
+        {/* Display status message */}
+            {statusMessage && <p className="text-green-500 text-center mt-2 italic">{statusMessage}</p>}
+        </div>
   </section>
   )
 }

@@ -10,6 +10,9 @@ import Error from '../../pages/Error'
 import config from "../../config";
 import Requests from "../../pages/Requests.jsx"
 import Profile from '../../pages/Profile.jsx'
+import DeleteSong from "../../pages/DeleteSong.jsx"
+import ResetPlaylist from "../../pages/ResetPlaylist.jsx"
+
 console.log(config);
 
 
@@ -26,6 +29,8 @@ const Main = (props) => {
             <Route path="/tip" element = {<Tip />}/>
             <Route path="/requests" element = {<Requests />}/>
             <Route path="/profile" element = {<Profile />}/>
+            <Route path="/deletesong" element = {<DeleteSong />}/>
+            <Route path="/resetplaylist" element = {<ResetPlaylist />}/>
             <Route path="/*" element = {<Error />}/>
          </Routes>
         </main>

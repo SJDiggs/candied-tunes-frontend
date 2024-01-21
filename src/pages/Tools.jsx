@@ -2,12 +2,16 @@ import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NewSongForm from './NewSongForm';
-import DeleteSongForm from './DeleteSongForm';
+import { updateAllSongs } from '../utilities/songs-service';
+import { updateAll } from '../utilities/songs-api';
+
+// import DeleteSongForm from './DeleteSongForm';
 
 const Tools = (props) => {
     const [showNewSongForm, setShowNewSongForm] = useState(false);
     const [showDeleteSongForm, setShowDeleteSongForm] = useState(false)
     const [songName, setSongName] = useState('')
+    const [playlistUpdateResult, setplaylistUpdateResult] = useState()
 
     const toggleNewSongForm = () => {
         setShowNewSongForm(!showNewSongForm)
@@ -17,22 +21,29 @@ const Tools = (props) => {
         setShowDeleteSongForm(!showDeleteSongForm)
     }
 
-    const handleResetPlaylist = () => {
-        // Add logic for Reset Playlist action
-        console.log("Resetting Playlist");
-    }
-
     const handleRequestsPlaylist = () => {
         // Add logic for view requests
         console.log("View Audience Requests")
     }
 
+    // RESET PLAYLIST SONGS
+    const handleResetPlaylist = async () => {
+        try {
+            const result = await updateAll()
+            setplaylistUpdateResult(result)
+        }catch (err){
+            console.log('Error updating playlist', err.message)
+}
+        console.log("Resetting Playlist");
+    }
+
+    // ADD A SONG TO THE PLAYLIST (FORM)
     const handleAddSong = () => {
         toggleNewSongForm()
         // Add logic for Add Song action
         console.log("Adding a song to Playlist");
     }
-
+    // DELETE SONG FROM PLAYLIST (FORM VERSION)
     const handleDeleteSong = () => {
         toggleDeleteSongForm()
         // Add logic for Remove Song action
@@ -95,13 +106,20 @@ const Tools = (props) => {
                         </tr>
                     <tr>
                         <td className="p-4">Reset Playlist - Recommended after every show</td>
-                        <td className="p-4"><button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={handleResetPlaylist}>Reset</button></td>
+                        <td className="p-4"><button className="bg-purple-900 text-white px-4 py-2 rounded-full" onClick={handleResetPlaylist}>Reset Playlist</button></td>
                     </tr>
                     <tr>
                         {/* ADD A SONG TO PLAYLIST */}
-                            <td className="p-4 font-bold" onClick={handleAddSong} style={{ cursor: 'pointer', color: 'silver' }}>Add a song to your playlist - Click Here</td>
+                            <td className='p-4'>Add a song to your Playlist</td>
+                            <td className="p-4">
+                                <button 
+                                    className='bg-purple-900 text-white px-4 py-2 rounded-full' 
+                                    onClick={handleAddSong}>
+                                        Add Songs
+                                    </button>
+                            </td>
                             <td className="p-4"></td>
-                        </tr>
+                    </tr>
                         {/* Conditionally render NewSongForm */}
                         {showNewSongForm && (
                             <tr>
@@ -111,19 +129,30 @@ const Tools = (props) => {
                             </tr>
                         )}
 
-                    {/* REMOVE A SONG FROM THE PLAYLIST */}
-                    <tr>
-                    <td className="p-4 font-bold" onClick={handleDeleteSong} style={{ cursor: 'pointer', color: 'silver' }}>Remove a song to your playlist - Click Here</td>
-                            <td className="p-4"></td>
-                        </tr>
+                    {/* REMOVE A SONG FROM THE PLAYLIST ((FORM VERSION)) */}
+                    {/* <tr> */}
+                    {/* <td className="p-4 font-bold" onClick={handleDeleteSong} style={{ cursor: 'pointer', color: 'silver' }}>Remove a song from your playlist - Click Here</td> */}
+                            {/* <td className="p-4"></td> */}
+                        {/* </tr> */}
                         {/* Conditionally render DeleteSongForm */}
-                        {showDeleteSongForm && (
-                            <tr>
-                                <td colSpan="2">
-                                    <DeleteSongForm />
-                                </td>
-                            </tr>
-                        )}
+                        {/* {showDeleteSongForm && ( */}
+                            {/* <tr> */}
+                                {/* <td colSpan="2"> */}
+                                    {/* <DeleteSongForm /> */}
+                                {/* </td> */}
+                            {/* </tr> */}
+                        {/* )} */}
+                    <tr>
+                        <td className="p-4">Remove a song from your Playlist</td>
+                        <td className="p-4">
+                            <button 
+                                className="bg-purple-900 text-white px-4 py-2 rounded-full">
+                                <Link to="/deletesong" className="text-white">
+                                   Remove Songs
+                                </Link>
+                            </button>
+                        </td>
+                    </tr>
 
                     <tr>
                         <td className="p-4">Update a song in your playlist</td>

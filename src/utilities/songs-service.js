@@ -23,32 +23,43 @@ export async function createSong(data){
     }
 }
 
-// // DELETE A SONG
-// export async function deleteSong() {
-//     try {
-//       const deletedSong = await songsAPI.destroy();
-//       return deletedSong;
-//     } catch (err) {
-//       throw err;
-//     }
-//   }
 // DELETE A SONG
-export async function deleteSong(songName, songArtist) {
+export async function deleteSong(id) {
     try {
-        const deletedSong = await songsAPI.destroy(songName, songArtist);
+      const deletedSong = await songsAPI.destroy(id)
+      return deletedSong;
+    } catch (err) {
+      throw err
+    }
+  }
+
+// DELETE A SONG BY NAME AND ARTIST
+export async function deleteSongByNameAndArtist(songName, songArtist) {
+    try {
+        const deletedSong = await songsAPI.destroy(songName, songArtist)
         return deletedSong;
     } catch (err) {
-        throw err;
+        throw err
     }
 }
 
-// GET A SONG (SHOW)
+// GET A SONG
 export async function getSong(id) {
     try {
-      const foundPerson = await songsAPI.detail(id);
-      return foundSong;
+      const foundSong = await songsAPI.detail(id);
+      return foundSong
     } catch (err) {
-      console.log(err);
-      throw new Error(err);
+      console.log(err)
+      throw new Error(err)
     }
   }
+
+// UPDATE ALL SONGS
+export async function updateAllSongs() {
+    try {
+        const updatedSongs = await songsAPI.updateAll()
+        return updatedSongs
+    }catch (err) {
+        throw err
+    }
+}
