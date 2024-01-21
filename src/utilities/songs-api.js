@@ -12,7 +12,7 @@ export async function index() {
   }
 }
 
-// CREATE SONG API CALL
+// CREATE SONG BACKEND API CALL
 export async function create(data){
     try {
         const clientData = JSON.stringify(data)
@@ -31,5 +31,37 @@ export async function create(data){
         }
     } catch (err) {
         throw new Error('Invalid Request')
+    }
+}
+
+// // DELETE SONG BACKEND API CALL
+// export async function destroy() {
+//     const url = `${config.BASE_URL}/${}`;
+//     const res = await fetch(url, {
+//       method: "DELETE",
+//     });
+//     if (res.ok) {
+//       return res.json();
+//     } else {
+//       throw new Error("Invalid Request");
+//     }
+//   }
+
+  // DELETE SONG BACKEND API CALL
+export async function destroy(songName, songArtist) {
+    let url = `${config.BASE_URL}`;
+
+    // If songName and songArtist are provided, append them to the URL
+    if (songName && songArtist) {
+        url += `?songName=${encodeURIComponent(songName)}&songArtist=${encodeURIComponent(songArtist)}`;
+    }
+    const res = await fetch(url, {
+        method: "DELETE",
+    });
+
+    if (res.ok) {
+        return res.json();
+    } else {
+        throw new Error("Invalid Request");
     }
 }

@@ -1,13 +1,20 @@
 import React from 'react';
 import { useState } from 'react';
-import NewSongForm from './NewSongForm';
 import { Link } from 'react-router-dom';
+import NewSongForm from './NewSongForm';
+import DeleteSongForm from './DeleteSongForm';
 
 const Tools = (props) => {
     const [showNewSongForm, setShowNewSongForm] = useState(false);
+    const [showDeleteSongForm, setShowDeleteSongForm] = useState(false)
+    const [songName, setSongName] = useState('')
 
     const toggleNewSongForm = () => {
-        setShowNewSongForm(!showNewSongForm);
+        setShowNewSongForm(!showNewSongForm)
+    }
+    
+    const toggleDeleteSongForm = () => {
+        setShowDeleteSongForm(!showDeleteSongForm)
     }
 
     const handleResetPlaylist = () => {
@@ -21,12 +28,13 @@ const Tools = (props) => {
     }
 
     const handleAddSong = () => {
-        toggleNewSongForm();
+        toggleNewSongForm()
         // Add logic for Add Song action
         console.log("Adding a song to Playlist");
     }
 
-    const handleRemoveSong = () => {
+    const handleDeleteSong = () => {
+        toggleDeleteSongForm()
         // Add logic for Remove Song action
         console.log("Removing a song from Playlist");
     }
@@ -90,6 +98,7 @@ const Tools = (props) => {
                         <td className="p-4"><button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={handleResetPlaylist}>Reset</button></td>
                     </tr>
                     <tr>
+                        {/* ADD A SONG TO PLAYLIST */}
                             <td className="p-4 font-bold" onClick={handleAddSong} style={{ cursor: 'pointer', color: 'silver' }}>Add a song to your playlist - Click Here</td>
                             <td className="p-4"></td>
                         </tr>
@@ -101,10 +110,21 @@ const Tools = (props) => {
                                 </td>
                             </tr>
                         )}
-                        <tr>
-                        <td className="p-4">Remove a song from your playlist</td>
-                        <td className="p-4"><button className="bg-red-500 text-white px-4 py-2 rounded" onClick={handleRemoveSong}>Remove</button></td>
-                    </tr>
+
+                    {/* REMOVE A SONG FROM THE PLAYLIST */}
+                    <tr>
+                    <td className="p-4 font-bold" onClick={handleDeleteSong} style={{ cursor: 'pointer', color: 'silver' }}>Remove a song to your playlist - Click Here</td>
+                            <td className="p-4"></td>
+                        </tr>
+                        {/* Conditionally render DeleteSongForm */}
+                        {showDeleteSongForm && (
+                            <tr>
+                                <td colSpan="2">
+                                    <DeleteSongForm />
+                                </td>
+                            </tr>
+                        )}
+
                     <tr>
                         <td className="p-4">Update a song in your playlist</td>
                         <td className="p-4"><button className="bg-yellow-500 text-white px-4 py-2 rounded" onClick={handleUpdateSong}>Update</button></td>

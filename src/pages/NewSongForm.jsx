@@ -10,9 +10,9 @@ export default function NewSongForm(props) {
     songIsOriginal: "false",
     songPlayed: "false",
   })
+  const [statusMessage, setStatusMessage] = useState(null)
 
   async function handleSubmit(e) {
-    // take stae -> pass into a variable
     //take local state in form pass to api(service function call)
     e.preventDefault()
     console.log(newForm, 'current data')
@@ -20,10 +20,12 @@ export default function NewSongForm(props) {
         // invoke the service function to call the create api
         const newSong = await createSong(newForm) 
         console.log('Data written on API call: ', newSong)
-        // alert("Song Added!")
-        // add message here to let user know the song was added
+        setStatusMessage('Song added successfully')
 
-    }catch(err){}
+    }catch(err){
+        console.log('Error deleting song: ', err.message)
+        setStatusMessage('Song not found...')
+    }
 
     //reset the form after user submitted it
     setNewForm({
@@ -33,27 +35,27 @@ export default function NewSongForm(props) {
         songIsOriginal: "false",
         songPlayed: "false",
     })
-    
   }
 
   function handleChange(e) {
-    const mappedValue = e.target.value 
-    console.log('Mapped Value: ', mappedValue)
+    // const mappedValue = e.target.value 
+    // console.log('Mapped Value: ', mappedValue)
+    setStatusMessage(null)
     setNewForm({...newForm, [e.target.name]: e.target.value})
   }
 
   return (
   
     <section>
-        <form onSubmit={handleSubmit}>
-        <input className = "border h-full w-1/4"
+        <form onSubmit={handleSubmit} className="flex items-center space-x-4">
+        <input className = "border h-full w-1/4 px-2 py-1"
             type="text"
             value={newForm.songName}
             name="songName"
             placeholder="Song Name"
             onChange={handleChange}
         />
-        <input className = "border h-full w-3/4"
+        <input className = "border h-full w-1/2 px-2 py-1"
             type="text"
             value={newForm.songArtist}
             name="songArtist"
@@ -61,7 +63,7 @@ export default function NewSongForm(props) {
             onChange={handleChange}
         />
         <select
-          className="border"
+          className="border px-2 py-1"
           value={newForm.songInstrument}
           name="songInstrument"
          
@@ -72,7 +74,7 @@ export default function NewSongForm(props) {
           <option value="Ukulele">Ukulele</option>
         </select>
         <select
-          className="border"
+          className="border px-2 py-1"
           value={newForm.songIsOriginal}
           name="songIsOriginal"
           onChange={handleChange}
@@ -81,7 +83,13 @@ export default function NewSongForm(props) {
           <option value="false">No</option>
           <option value="true">Yes</option>
         </select>
-      <input className = "bg-indigo-600 rounded-full py-0 px-2 mt-2 ml-10" type="submit" value="Add Song" />
+        <input 
+          className = "bg-indigo-600 rounded-full py-0 px-2 mt-2 ml-10" 
+          type="submit" 
+          value="Add Song" 
+          />
+          {/* Display status message */}
+        {statusMessage && <p className="text-green-500 text-center mt-2 italic">{statusMessage}</p>}
     </form>
   </section>
   )

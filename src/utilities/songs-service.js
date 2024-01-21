@@ -23,3 +23,32 @@ export async function createSong(data){
     }
 }
 
+// // DELETE A SONG
+// export async function deleteSong() {
+//     try {
+//       const deletedSong = await songsAPI.destroy();
+//       return deletedSong;
+//     } catch (err) {
+//       throw err;
+//     }
+//   }
+// DELETE A SONG
+export async function deleteSong(songName, songArtist) {
+    try {
+        const deletedSong = await songsAPI.destroy(songName, songArtist);
+        return deletedSong;
+    } catch (err) {
+        throw err;
+    }
+}
+
+// GET A SONG (SHOW)
+export async function getSong(id) {
+    try {
+      const foundPerson = await songsAPI.detail(id);
+      return foundSong;
+    } catch (err) {
+      console.log(err);
+      throw new Error(err);
+    }
+  }
