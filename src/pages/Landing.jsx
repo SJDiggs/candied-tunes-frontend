@@ -2,23 +2,23 @@ import { useState, useEffect } from "react"
 import config from "./../config"
 import { getSongs } from "../utilities/songs-service";
 import Requests from "./Requests";
+import { useRequestContext } from "../components/Context/RequestContext" 
 
 const Landing = (props) => {
-
-    const [requestedSongs, setRequestedSongs] = useState([]);
-    
-    const [selectedSong, setSelectedSong] = useState({
-        songName: "",
-        songArtist: "",
-        songInstrument: ""
-      });
-
+    const { addRequestedSong } = useRequestContext(); // <=================== remove =======
+    const [requestedSongs, setRequestedSongs] = useState([])
     const [isLoading, setIsLoading] = useState(true) //when page loads true, when loaded change to false
     const [songs, setSongs] = useState([])
 
-    // const BASE_URL = "http://localhost:4000/songs" //Dev environment
-    // const BASE_URL = "<heroku link>" //Prod once Heroku is deployed
+    // const [selectedSong, setSelectedSong] = useState({ <======= uncomment =======
+    //     songId: "",
+    //     songName: "",
+    //     songArtist: "",
+    //     songInstrument: "",
+    //     songPlayed: ""
+    //   });
 
+    
     const handleRequest = async () => {
         try {
             const songsData = await getSongs()
@@ -32,20 +32,26 @@ const Landing = (props) => {
         }
     }
 
-
-    const handleRequestClick = (songId, songName, songArtist, songInstrument) => {
+    const handleRequestClick = (songId, songName, songArtist, songInstrument, songPlayed) => {
         // Update the state to reflect that the song has been requested
-        setRequestedSongs((previousState) => [...previousState, songId]);
-
-        setSelectedSong({
-            songName: songName,
-            songArtist: songArtist,
-            songInstrument: songInstrument
+        // setRequestedSongs((previousState) => [...previousState, songId]); // <======== uncomment ======
+        addRequestedSong({   // <==== remove ====
+            songId,
+            songName,
+            songArtist,
+            songInstrument,
           });
+        // setSelectedSong({        // <===== \/ ===== uncomment ====== 
+        //     songId: songId,
+        //     songName: songName,
+        //     songArtist: songArtist,
+        //     songInstrument: songInstrument,
+        //     songPlayed: songPlayed
+        //   });
     }
 
     const renderSongs = () => (
-        <section className="song-list flex justify-center items-center h-screen">
+        <section className="song-list flex justify-center h-screen">
           <div className="overflow-x-auto">
             <table className="min-w-full bg-black border border-stone-600 shadow-lg">
               <thead>
@@ -73,7 +79,7 @@ const Landing = (props) => {
                         ? "bg-pink-800 text-white"
                         : "bg-purple-900 text-white"
                     }`}
-                    onClick={() => handleRequestClick(s._id, s.songName, s.songArtist, s.songInstrument)}
+                    onClick={() => handleRequestClick(s._id, s.songName, s.songArtist, s.songInstrument, s.songPlayed)}
                     disabled={s.songPlayed}
                   >
                     {s.songPlayed ? "Played" : requestedSongs.includes(s._id) ? "Requested" : "Request"}
