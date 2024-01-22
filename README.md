@@ -49,6 +49,29 @@ There is also an Auth0 login feature which is used to identify Musicians and sig
 - Auth0
 - Vite
 
+# Screenshots: 
+
+  ## App Flow
+    ![](./public/app_flow.png)
+
+  ## App Landing Page - All Users
+    ![](./public/landing_page.png)
+
+  ## User Requests Song
+    ![](./public/request_song.png)
+
+  ## Musician Tools 
+    ![](./public/musician_tools.png)
+
+  ## Musician Add Song
+    ![](./public/add_song.png)
+
+  ## Musician Delete Song
+    ![](./public/remove_song.png)
+
+  ## Musician Requested Song View
+    ![](./rested_song_view.png)
+
 
 # Acknowledgments/References/Source Material
 
