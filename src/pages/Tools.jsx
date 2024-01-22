@@ -81,14 +81,16 @@ const Tools = (props) => {
     }
 
     return (
+
         <div className="container mx-auto my-8">
-            <h1 className="text-3xl font-semibold text-gray-400 mt-20 mb-2">Musician Tools</h1>
+            <h1 className="text-3xl font-semibold text-gray-400 mt-5 mb-2">Musician Tools</h1>
             
             {/* Songs Table */}
             <div className="flex justify-center">
-            <table className="table-auto w-3/4 border border-gray-500 mb-8">
+            {/* <table className="table-auto w-3/4 border border-gray-500 mb-8"> */}
+            <table className="table-auto w-3/4 bg-black border border-stone-600 shadow-lg mb-8">
                 <thead>
-                    <tr className="bg-gray-500">
+                    <tr className="bg-stone-600 text-white">
                         <th className="p-4 text-left w-1/2">Song Management</th>
                         <th className="p-4 w-1/2"></th>
                     </tr>
@@ -98,7 +100,7 @@ const Tools = (props) => {
                             <td className="p-4">See Requested Songs</td>
                             <td className="p-4">
                                 <Link to="/requests">
-                                    <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={handleRequestsPlaylist}>
+                                    <button className="bg-purple-900 text-white px-4 py-2 rounded-full" onClick={handleRequestsPlaylist}>
                                         Requests
                                     </button>
                                 </Link>
@@ -156,7 +158,7 @@ const Tools = (props) => {
 
                     <tr>
                         <td className="p-4">Update a song in your playlist</td>
-                        <td className="p-4"><button className="bg-yellow-500 text-white px-4 py-2 rounded" onClick={handleUpdateSong}>Update</button></td>
+                        <td className="p-4"><button className="bg-gray-500 text-white px-4 py-2 rounded-full" onClick={handleUpdateSong}>Update Song</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -164,9 +166,9 @@ const Tools = (props) => {
 
             {/* Shows Table */}
             <div className="flex justify-center">
-            <table className="table-auto w-3/4 border border-gray-500 mb-8">
+            <table className="table-auto w-3/4 bg-black border border-gray-500 mb-8 ">
                 <thead>
-                    <tr className="bg-gray-500">
+                    <tr className="bg-stone-600 text-white">
                         <th className="p-4 text-left w-1/2">Show Management</th>
                         <th className="p-4 w-1/2"></th>
                     </tr>
@@ -174,15 +176,15 @@ const Tools = (props) => {
                 <tbody>
                     <tr>
                         <td className="p-4">Add a show</td>
-                        <td className="p-4"><button className="bg-green-500 text-white px-4 py-2 rounded" onClick={handleAddShow}>Add</button></td>
+                        <td className="p-4"><button className="bg-gray-500 text-white px-4 py-2 rounded-full" onClick={handleAddShow}>Add Show</button></td>
                     </tr>
                     <tr>
                         <td className="p-4">Delete a show</td>
-                        <td className="p-4"><button className="bg-red-500 text-white px-4 py-2 rounded" onClick={handleDeleteShow}>Delete</button></td>
+                        <td className="p-4"><button className="bg-gray-500 text-white px-4 py-2 rounded-full" onClick={handleDeleteShow}>Remove Show</button></td>
                     </tr>
                     <tr>
                         <td className="p-4">Update a show</td>
-                        <td className="p-4"><button className="bg-yellow-500 text-white px-4 py-2 rounded" onClick={handleUpdateShow}>Update</button></td>
+                        <td className="p-4"><button className="bg-gray-500 text-white px-4 py-2 rounded-full" onClick={handleUpdateShow}>Update Show</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -190,9 +192,9 @@ const Tools = (props) => {
 
             {/* Admin Table */}
             <div className="flex justify-center">
-            <table className="table-auto w-3/4 border border-gray-500 mb-8">
+            <table className="table-auto w-3/4 bg-black border border-stone-600 mb-8">
                 <thead>
-                    <tr className="bg-gray-500">
+                    <tr className="bg-stone-600 text-white">
                         <th className="p-4 text-left w-1/2">Admin</th>
                         <th className="p-4 w-1/2"></th>
                     </tr>
@@ -200,11 +202,11 @@ const Tools = (props) => {
                 <tbody>
                     <tr>
                         <td className="p-4">Update my About</td>
-                        <td className="p-4"><button className="bg-yellow-500 text-white px-4 py-2 rounded" onClick={handleUpdateAbout}>Update</button></td>
+                        <td className="p-4"><button className="bg-gray-500 text-white px-4 py-2 rounded-full" onClick={handleUpdateAbout}>Update Me</button></td>
                     </tr>
                     <tr>
                         <td className="p-4">Send my fans an email</td>
-                        <td className="p-4"><button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={handleSendEmail}>Send Email</button></td>
+                        <td className="p-4"><button className="bg-gray-500 text-white px-4 py-2 rounded-full" onClick={handleSendEmail}>Send Email</button></td>
                     </tr>
                 </tbody>
             </table>
