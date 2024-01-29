@@ -80,9 +80,10 @@ There is also an Auth0 login feature which is used to identify Musicians and sig
 
 # Future Enhancements/Releases:
 
-- Authentication updates
+- Authentication updates / protected routes
 - Bug fixes
-- Shows features
+- Shows feature
 - Tip system/ payment gateway integration
 - About/Bio
 - Email feature
+- socket-io for song request handling
