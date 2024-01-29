@@ -12,7 +12,6 @@ const Tools = (props) => {
     const [showDeleteSongForm, setShowDeleteSongForm] = useState(false)
     const [songName, setSongName] = useState('')
     const [playlistUpdateResult, setplaylistUpdateResult] = useState()
-
     const toggleNewSongForm = () => {
         setShowNewSongForm(!showNewSongForm)
     }
@@ -23,7 +22,7 @@ const Tools = (props) => {
 
     const handleRequestsPlaylist = () => {
         // Add logic for view requests
-        console.log("View Audience Requests")
+        console.log("tools - View Audience Requests")
     }
 
     // RESET PLAYLIST SONGS
@@ -97,11 +96,12 @@ const Tools = (props) => {
                 </thead>
                 <tbody>
                 <tr>
-                            <td className="p-4">See Requested Songs</td>
+                    {/* VIEW SONG REQUESTS */}
+                            <td className="p-4">View Requested Songs</td>
                             <td className="p-4">
                                 <Link to="/requests">
-                                    <button className="bg-purple-900 text-white px-4 py-2 rounded-full" onClick={handleRequestsPlaylist}>
-                                        Requests
+                                    <button className="bg-purple-900 text-white px-4 py-2 rounded-full">
+                                        View Requests
                                     </button>
                                 </Link>
                             </td>
@@ -192,7 +192,7 @@ const Tools = (props) => {
 
             {/* Admin Table */}
             <div className="flex justify-center">
-            <table className="table-auto w-3/4 bg-black border border-stone-600 mb-8">
+            <table className="table-auto w-3/4 bg-blackborder border-stone-600 mb-8">
                 <thead>
                     <tr className="bg-stone-600 text-white">
                         <th className="p-4 text-left w-1/2">Admin</th>

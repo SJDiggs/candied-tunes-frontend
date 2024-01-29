@@ -13,7 +13,7 @@ import Profile from '../../pages/Profile.jsx'
 import DeleteSong from "../../pages/DeleteSong.jsx"
 import ResetPlaylist from "../../pages/ResetPlaylist.jsx"
 
-console.log(config);
+// console.log(config);
 
 
 const Main = (props) => {
