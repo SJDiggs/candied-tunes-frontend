@@ -9,7 +9,7 @@ const Requests = () => {
       
       console.log('Requests - Play button clicked')
       // Logic to handle the Play button click
-        // update the songPlayed to true on the songs table
+        // fetch update by songId, update songPlayed to true on the mongoDB songs table
         // reset the state of the landing table so that the request button is disabled and the song is grayed out
     } catch (err) {
       console.log('Requests - Play Button error:', err.message);
@@ -17,7 +17,7 @@ const Requests = () => {
   };
 
   return (
-    <section className="requested-song-list flex justify-center h-screen">
+    <section className="requested-song-list flex justify-center h-screen mt-14">
       <div className="overflow-x-auto w-full">
         <table className="w-full bg-black border border-stone-600 shadow-lg">
           <thead>

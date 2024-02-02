@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const LoginButton = ({ setIsAdminUser }) => {
+const LoginButton = () => {
   console.log('loginButton -')
   
-  const { loginWithRedirect, user, logout } = useAuth0();
+  const { loginWithRedirect, user, isAuthenticated, logout } = useAuth0();
   const [isAdminUser, setIsAdminUserLocal] = useState(false);
 
   const handleLogin = async () => {
@@ -19,7 +19,7 @@ const LoginButton = ({ setIsAdminUser }) => {
   const checkIfAdmin = (email) => {
     console.log('checkIfAdmin -')
     // compare the email to a list of admin emails
-    const adminEmails = ["stevediggs70@gmail.com", "candie.tremblay@gmail.com", "Allenseth80@gmail.com"];
+    const adminEmails = ["stevediggs70@gmail.com", "candie.tremblay@gmail.com"];
     return adminEmails.includes(email);
   };
 

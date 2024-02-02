@@ -1,11 +1,9 @@
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom'
 import Header from '../Header/Header.jsx'
 import Main from '../Main/index.jsx'
-import Nav from '../Nav/Nav.jsx';
-import { RequestProvider } from '../Context/RequestContext.jsx';
+import { RequestProvider } from '../Context/RequestContext.jsx'
 
-
-//Pages
+// import Nav from '../Nav/Nav.jsx';
 
 
 function App() {
@@ -15,7 +13,6 @@ function App() {
       <div className = 'App'>
       
           <RequestProvider>
-            <Nav />
             <Header />
             <Main />
           </RequestProvider>
